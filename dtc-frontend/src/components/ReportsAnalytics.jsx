@@ -17,7 +17,9 @@ import {
   TableHead,
   TableRow,
   TableCell,
-  TableBody
+  TableBody,
+  AppBar,
+  Toolbar
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
@@ -86,6 +88,27 @@ const ReportsAnalytics = () => {
   return (
     <Box sx={{ display: 'flex', minHeight: '75vh', overflow: 'hidden' }}>
       <CssBaseline />
+      <AppBar
+        position="fixed"
+        sx={{
+          display: { xs: 'block', sm: 'none' },
+          bgcolor: 'transparent',
+          boxShadow: 'none',
+          top: 0
+        }}
+      >
+        <Toolbar>
+          <IconButton
+            edge="start"
+            color="black"
+            aria-label="menu"
+            onClick={handleDrawerToggle}
+            sx={{ mr: 2 }}
+          >
+            <MenuIcon />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
       <Box
         component="nav"
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
@@ -215,20 +238,20 @@ const ReportsAnalytics = () => {
                 />
               </Box>
             </Grid>
-            <Grid item xs={12} md={3}>
-              <Box
-                sx={{
-                  padding: 2,
-                  borderRadius: '20px',
-                  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-                  height: '70%',
-                  width: 'auto',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  backgroundColor: "#74c0fc"
-                }}
-              >
+             <Grid item xs={12} md={3}>
+               <Box
+                 sx={{
+                   padding: 2,
+                   borderRadius: '20px',
+                   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                   height: '70%',
+                   width: 'auto',
+                   display: 'flex',
+                   justifyContent: 'center',
+                   alignItems: 'center',
+                   backgroundColor: "#74c0fc"
+                 }}
+               >
                 <Typography variant="h6" sx={{fontSize: '1.3rem', textAlign: 'center'}}>Bus Active this <br /> month</Typography>
               </Box>
             </Grid>
@@ -357,16 +380,17 @@ const ReportsAnalytics = () => {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
               <Marker position={[51.505, -0.09]}>
-                <Popup>
-                  A pretty CSS3 popup. <br /> Easily customizable.
-                </Popup>
-              </Marker>
-            </MapContainer>
-          </Box>
-        </Box>
-      </Box>
-    </Box>
-  );
-};
+                 <Popup>
+                   A pretty CSS3 popup. <br /> Easily customizable.
+                 </Popup>
+               </Marker>
+             </MapContainer>
+           </Box>
+         </Box>
+       </Box>
+     </Box>
+   );
+ };
 
-export default ReportsAnalytics;
+ export default ReportsAnalytics;
+

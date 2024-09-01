@@ -15,16 +15,18 @@ import {
   TableContainer,
   TableRow,
   Paper,
-  Divider
+  Divider,
+  AppBar,
+  Toolbar
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import DirectionsBusIcon from '@mui/icons-material/DirectionsBus';
 import PeopleIcon from '@mui/icons-material/People';
-import RouteIcon from "@mui/icons-material/AltRoute";
 import BarChartIcon from '@mui/icons-material/BarChart';
 import FeedbackIcon from '@mui/icons-material/Feedback';
+import RouteIcon from '@mui/icons-material/Route'; // Assuming this import was missing
 import { Link } from 'react-router-dom';
 
 const drawerWidth = '200px';
@@ -81,6 +83,19 @@ const CrewManagement = () => {
   return (
     <Box sx={{ display: 'flex', minHeight: '75vh', overflow: 'hidden' }}>
       <CssBaseline />
+      <AppBar position="fixed" sx={{ display: { xs: 'block', sm: 'none' }, bgcolor: 'transparent', boxShadow: 'none' }}>
+        <Toolbar>
+          <IconButton
+            edge="start"
+            color="black"
+            aria-label="menu"
+            onClick={handleDrawerToggle}
+            sx={{ mr: 2, mb: 2 }}
+          >
+            <MenuIcon />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
       <Box
         component="nav"
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
@@ -154,7 +169,6 @@ const CrewManagement = () => {
           flexDirection: 'column',
           alignItems: 'center',
           position: 'relative',
-          // marginLeft: mobileOpen ? `${drawerWidth}` : `${drawerCollapsedWidth}`,
           transition: 'margin-left 0.3s ease-in-out',
           padding: 2,
           overflowX: 'hidden',

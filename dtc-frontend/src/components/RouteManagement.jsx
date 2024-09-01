@@ -9,12 +9,14 @@ import {
   Box,
   CssBaseline,
   IconButton,
+  AppBar,
+  Toolbar,
   Grid,
 } from '@mui/material';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import DirectionsBusIcon from '@mui/icons-material/DirectionsBus';
 import PeopleIcon from '@mui/icons-material/People';
-import RouteIcon from "@mui/icons-material/AltRoute";
+import RouteIcon from '@mui/icons-material/AltRoute';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import FeedbackIcon from '@mui/icons-material/Feedback';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -68,6 +70,26 @@ const RouteManagement = () => {
   return (
     <Box sx={{ display: 'flex', minHeight: '75vh', overflow: 'hidden' }}>
       <CssBaseline />
+      <AppBar
+        position="fixed"
+        sx={{
+          display: { xs: 'block', sm: 'none' },
+          bgcolor: 'transparent',
+          boxShadow: 'none',
+        }}
+      >
+        <Toolbar>
+          <IconButton
+            edge="start"
+            color="black"
+            aria-label="menu"
+            onClick={handleDrawerToggle}
+            sx={{ mr: 2 }}
+          >
+            <MenuIcon />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
       <Box component="nav" sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}>
         <Drawer
           variant="temporary"
@@ -135,6 +157,7 @@ const RouteManagement = () => {
         sx={{
           flexGrow: 1,
           p: 3,
+          // marginTop: { xs: '64px', sm: 0 }, // Adjust margin for AppBar
         }}
       >
         <Typography variant="h5" sx={{ fontWeight: 'bold', marginBottom: 2 }}>
@@ -158,10 +181,8 @@ const RouteManagement = () => {
           <Typography variant="h6" sx={{ fontWeight: 'bold', marginBottom: 1 }}>
             Route Analytics
           </Typography>
-          {/* Placeholder for graph */}
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Box sx={{ width: '50%' }}>
-              {/* Replace this with your graph component */}
               <img
                 src={img3}
                 alt="Graph Placeholder"

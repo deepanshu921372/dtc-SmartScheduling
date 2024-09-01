@@ -10,7 +10,6 @@ import {
   Box,
   CssBaseline,
   Grid,
-  Icon,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
@@ -23,7 +22,7 @@ import FeedbackIcon from "@mui/icons-material/Feedback";
 import { Link } from "react-router-dom";
 
 const drawerWidth = "200px";
-const drawerCollapsedWidth = "5%"; // Adjust to a percentage or flexible value
+const drawerCollapsedWidth = "5%";
 
 const Office = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -38,33 +37,13 @@ const Office = () => {
         <List>
           {[
             { text: "Dashboard", icon: <DashboardIcon />, to: "/office" },
-            {
-              text: "Bus Management",
-              icon: <DirectionsBusIcon />,
-              to: "/bus-management",
-            },
-            {
-              text: "Crew Management",
-              icon: <PeopleIcon />,
-              to: "/crew-management",
-            },
-            {
-              text: "Route Management",
-              icon: <RouteIcon />,
-              to: "/route-management",
-            },
-            {
-              text: "Reports and Analytics",
-              icon: <BarChartIcon />,
-              to: "/reports-analytics",
-            },
+            { text: "Bus Management", icon: <DirectionsBusIcon />, to: "/bus-management" },
+            { text: "Crew Management", icon: <PeopleIcon />, to: "/crew-management" },
+            { text: "Route Management", icon: <RouteIcon />, to: "/route-management" },
+            { text: "Reports and Analytics", icon: <BarChartIcon />, to: "/reports-analytics" },
           ].map((item) => (
             <ListItem button key={item.text} component={Link} to={item.to}>
-              <ListItemIcon
-                sx={{
-                  paddingBottom: mobileOpen ? 0 : 2, // Add padding-bottom when collapsed
-                }}
-              >
+              <ListItemIcon>
                 {item.icon}
               </ListItemIcon>
               {mobileOpen && <ListItemText primary={item.text} />}
@@ -73,18 +52,10 @@ const Office = () => {
         </List>
         <List>
           {[
-            {
-              text: "Feedback and Support",
-              icon: <FeedbackIcon />,
-              to: "/feedback-support",
-            },
+            { text: "Feedback and Support", icon: <FeedbackIcon />, to: "/feedback-support" },
           ].map((item) => (
             <ListItem button key={item.text} component={Link} to={item.to}>
-              <ListItemIcon
-                sx={{
-                  paddingBottom: mobileOpen ? 0 : 2, // Add padding-bottom when collapsed
-                }}
-              >
+              <ListItemIcon>
                 {item.icon}
               </ListItemIcon>
               {mobileOpen && <ListItemText primary={item.text} />}
@@ -102,6 +73,7 @@ const Office = () => {
         component="nav"
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
       >
+        {/* Temporary Drawer for mobile view */}
         <Drawer
           variant="temporary"
           open={mobileOpen}
@@ -113,30 +85,33 @@ const Office = () => {
             display: { xs: "block", sm: "none" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
-              width: "20%", // Adjust to a percentage or flexible value
+              width: drawerWidth,
             },
           }}
         >
           {drawerContent}
         </Drawer>
+
+        {/* Permanent Drawer for desktop view */}
         <Drawer
           variant="permanent"
           sx={{
-            display: { xs: 'none', sm: 'block' },
-            '& .MuiDrawer-paper': {
+            display: { xs: "none", sm: "block" },
+            "& .MuiDrawer-paper": {
               width: mobileOpen ? drawerWidth : drawerCollapsedWidth,
-              boxSizing: 'border-box',
-              backgroundColor: 'lightblue',
-              borderRadius: '0 10px  10px 0px',
-              transition: 'width 0.3s ease-in-out',
-              height: '675px',
-              top: '120px',
-              position: 'fixed',
-              paddingTop: '64px',
+              boxSizing: "border-box",
+              backgroundColor: "lightblue",
+              borderRadius: "0 10px 10px 0px",
+              transition: "width 0.3s ease-in-out",
+              height: "675px",
+              top: "120px",
+              position: "fixed",
+              paddingTop: "64px",
             },
           }}
           open
         >
+          {/* Drawer toggle button */}
           <Box
             sx={{
               position: "absolute",
@@ -154,7 +129,7 @@ const Office = () => {
                 color: "black",
                 backgroundColor: "white",
                 borderRadius: "50%",
-                mr: 2
+                mr: 2,
               }}
             >
               {mobileOpen ? <CloseIcon /> : <MenuIcon />}
@@ -163,6 +138,8 @@ const Office = () => {
           {drawerContent}
         </Drawer>
       </Box>
+
+      {/* Main content */}
       <Box
         component="main"
         sx={{
@@ -171,9 +148,7 @@ const Office = () => {
           flexDirection: "column",
           alignItems: "center",
           position: "relative",
-          marginLeft: mobileOpen
-            ? `${drawerWidth} - 20px`
-            : `${drawerCollapsedWidth} - 20px`,
+          marginLeft: { xs: 0, sm: mobileOpen ? drawerWidth : drawerCollapsedWidth },
           transition: "margin-left 0.3s ease-in-out",
           padding: 2,
           overflowX: "hidden",
@@ -204,7 +179,7 @@ const Office = () => {
               height: "190px",
               backgroundColor: "#74c0fc",
               borderRadius: "20px",
-              width: "40%",
+              width: { xs: "90%", sm: "70%", md: "40%" },
               padding: "10px",
               display: "flex",
               alignItems: "center",
@@ -282,7 +257,6 @@ const Office = () => {
                 >
                   <Typography
                     variant="body2"
-                    color="white"
                     sx={{
                       textAlign: "center",
                       fontSize: "1.4rem",
@@ -297,13 +271,15 @@ const Office = () => {
           ))}
         </Grid>
       </Box>
+      {/* Drawer toggle button for mobile */}
       <IconButton
         onClick={handleDrawerToggle}
         sx={{
           position: "fixed",
-          top: 16,
+          top: 1,
           left: 16,
           zIndex: 1200,
+          display: { sm: "none" }, // Hide on desktop
         }}
       >
         <MenuIcon />

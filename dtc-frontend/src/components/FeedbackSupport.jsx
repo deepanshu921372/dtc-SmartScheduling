@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+  AppBar,
   Drawer,
   IconButton,
   List,
@@ -11,6 +12,8 @@ import {
   CssBaseline,
   Button,
   TextareaAutosize,
+  Toolbar,
+  Paper,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
@@ -22,8 +25,8 @@ import BarChartIcon from "@mui/icons-material/BarChart";
 import FeedbackIcon from "@mui/icons-material/Feedback";
 import { Link } from "react-router-dom";
 
-const drawerWidth = "200px";
-const drawerCollapsedWidth = "5%"; // Set desired width when collapsed
+const drawerWidth = 240;
+const drawerCollapsedWidth = 60;
 
 const FeedbackSupport = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -35,136 +38,138 @@ const FeedbackSupport = () => {
 
   const drawerContent = (
     <div>
-      <Box>
-        <List>
-          {[
-            { text: "Dashboard", icon: <DashboardIcon />, to: "/office" },
-            {
-              text: "Bus Management",
-              icon: <DirectionsBusIcon />,
-              to: "/bus-management",
-            },
-            {
-              text: "Crew Management",
-              icon: <PeopleIcon />,
-              to: "/crew-management",
-            },
-            {
-              text: "Route Management",
-              icon: <RouteIcon />,
-              to: "/route-management",
-            },
-            {
-              text: "Reports and Analytics",
-              icon: <BarChartIcon />,
-              to: "/reports-analytics",
-            },
-          ].map((item) => (
-            <ListItem button key={item.text} component={Link} to={item.to}>
-              <ListItemIcon
-                sx={{
-                  paddingBottom: mobileOpen ? 0 : 2, // Add padding-bottom when collapsed
-                }}
-              >
-                {item.icon}
-              </ListItemIcon>
-              {mobileOpen && <ListItemText primary={item.text} />}
-            </ListItem>
-          ))}
-        </List>
-        <List>
-          {[
-            {
-              text: "Feedback and Support",
-              icon: <FeedbackIcon />,
-              to: "/feedback-support",
-            },
-          ].map((item) => (
-            <ListItem button key={item.text} component={Link} to={item.to}>
-              <ListItemIcon
-                sx={{
-                  paddingBottom: mobileOpen ? 0 : 2, // Add padding-bottom when collapsed
-                }}
-              >
-                {item.icon}
-              </ListItemIcon>
-              {mobileOpen && <ListItemText primary={item.text} />}
-            </ListItem>
-          ))}
-        </List>
-        
-      </Box>
+      <List>
+        {[
+          { text: "Dashboard", icon: <DashboardIcon />, to: "/office" },
+          {
+            text: "Bus Management",
+            icon: <DirectionsBusIcon />,
+            to: "/bus-management",
+          },
+          {
+            text: "Crew Management",
+            icon: <PeopleIcon />,
+            to: "/crew-management",
+          },
+          {
+            text: "Route Management",
+            icon: <RouteIcon />,
+            to: "/route-management",
+          },
+          {
+            text: "Reports and Analytics",
+            icon: <BarChartIcon />,
+            to: "/reports-analytics",
+          },
+        ].map((item) => (
+          <ListItem button key={item.text} component={Link} to={item.to}>
+            <ListItemIcon sx={{ paddingBottom: mobileOpen ? 0 : 2 }}>{item.icon}</ListItemIcon>
+            <ListItemText primary={item.text} />
+          </ListItem>
+        ))}
+      </List>
+      <List>
+        {[
+          {
+            text: "Feedback and Support",
+            icon: <FeedbackIcon />,
+            to: "/feedback-support",
+          },
+        ].map((item) => (
+          <ListItem button key={item.text} component={Link} to={item.to}>
+            <ListItemIcon sx={{ paddingBottom: mobileOpen ? 0 : 2 }}>{item.icon}</ListItemIcon>
+            <ListItemText primary={item.text} />
+          </ListItem>
+        ))}
+      </List>
     </div>
   );
 
   return (
-    <Box sx={{ display: "flex", minHeight: "75vh", overflow: "hidden" }}>
+    <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <Box
-        component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+      <AppBar
+        position="fixed"
+        sx={{
+          width: { sm: `calc(100% - ${drawerWidth}px)` },
+          ml: { sm: `${drawerWidth}px` },
+          backgroundColor: 'transparent',
+          boxShadow: "none"
+        }}
       >
-        <Drawer
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true,
-          }}
-          sx={{
-            display: { xs: "block", sm: "none" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
-          }}
-        >
-          {drawerContent}
-        </Drawer>
-        <Drawer
-          variant="permanent"
-          sx={{
-            display: { xs: 'none', sm: 'block' },
-            '& .MuiDrawer-paper': {
-              width: mobileOpen ? drawerWidth : drawerCollapsedWidth,
-              boxSizing: 'border-box',
-              backgroundColor: 'lightblue',
-              borderRadius: '0 10px  10px 0px',
-              transition: 'width 0.3s ease-in-out',
-              height: '675px',
-              top: '120px',
-              position: 'fixed',
-              paddingTop: '64px',
-            },
-          }}
-          open
-        >
-          <Box
+        <Toolbar>
+          <IconButton
+            color="black"
+            aria-label="open drawer"
+            onClick={handleDrawerToggle}
+            edge="start"
             sx={{
-              position: "absolute",
-              top: 0,
-              right: 0,
-              left: 0,
-              display: "flex",
-              justifyContent: "flex-end",
-              padding: 1,
+              display: { sm: "none"},
             }}
           >
-            <IconButton
-              onClick={handleDrawerToggle}
-              sx={{
-                color: "black",
-                backgroundColor: "white",
-                borderRadius: "50%",
-                mr: 2
-              }}
-            >
-              {mobileOpen ? <CloseIcon /> : <MenuIcon />}
-            </IconButton>
-          </Box>
-          {drawerContent}
-        </Drawer>
-      </Box>
+            <MenuIcon />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+      <Drawer
+        variant="temporary"
+        open={mobileOpen}
+        onClose={handleDrawerToggle}
+        ModalProps={{
+          keepMounted: true,
+        }}
+        sx={{
+          display: { xs: "block", sm: "none" },
+          "& .MuiDrawer-paper": {
+            width: drawerWidth,
+            boxSizing: "border-box",
+          },
+        }}
+      >
+        {drawerContent}
+      </Drawer>
+      <Drawer
+        variant="permanent"
+        sx={{
+          display: { xs: "none", sm: "block" },
+          "& .MuiDrawer-paper": {
+            width: mobileOpen ? drawerWidth : drawerCollapsedWidth,
+            boxSizing: "border-box",
+            backgroundColor: 'lightblue',
+            borderRadius: '0 10px 10px 0',
+            transition: "width 0.3s ease-in-out",
+            height: "672px",
+            top: "122px",
+            position: "fixed",
+            paddingTop: "64px",
+          },
+        }}
+        open
+      >
+        <Box
+          sx={{
+            position: "absolute",
+            top: 0,
+            right: 0,
+            left: 0,
+            display: "flex",
+            justifyContent: "flex-end",
+            padding: 1,
+          }}
+        >
+          <IconButton
+            onClick={handleDrawerToggle}
+            sx={{
+              color: "black",
+              backgroundColor: "white",
+              borderRadius: "50%",
+            }}
+          >
+            {mobileOpen ? <CloseIcon /> : <MenuIcon />}
+          </IconButton>
+        </Box>
+        {drawerContent}
+      </Drawer>
       <Box
         component="main"
         sx={{
@@ -172,61 +177,70 @@ const FeedbackSupport = () => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          position: "relative",
-          marginLeft: mobileOpen ? `${drawerWidth}` : `${drawerCollapsedWidth}`,
+          marginLeft: { sm: mobileOpen ? `${drawerWidth}px` : `${drawerCollapsedWidth}px` },
           transition: "margin-left 0.3s ease-in-out",
           padding: 2,
           overflowX: "hidden",
+          marginTop: '64px', // To accommodate the AppBar height
         }}
       >
-        <Typography
-          variant="h6"
-          sx={{ fontSize: "3rem", fontWeight: 700, textAlign: "center", mt: 5 }}
-        >
-          Feedback and Support
-        </Typography>
         <Box
           sx={{
-            width: "80%",
+            width: "100%",
             maxWidth: "1200px",
-            margin: "auto",
             padding: 2,
             borderRadius: "8px",
             boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+            backgroundColor: "white",
           }}
         >
-          <Box sx={{ mb: 2, display: "flex", gap: 1 }}>
-            <Button
-              variant="contained"
-              onClick={() => setActiveTab("feedback")}
-              sx={{
-                flexGrow: 1,
-                fontSize: "1.2rem",
-                backgroundColor: "#74c0fc",
-                color: "black",
-                fontWeight: "bold",
-              }}
-            >
-              Feedback
-            </Button>
-            <Button
-              variant="contained"
-              onClick={() => setActiveTab("grievance")}
-              sx={{
-                flexGrow: 1,
-                fontSize: "1.2rem",
-                backgroundColor: "#74c0fc",
-                color: "black",
-                fontWeight: "bold",
-              }}
-            >
-              Grievance Support
-            </Button>
-          </Box>
-          {activeTab === "feedback" && (
-            <Box>
-              <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-                <Typography variant="body1" sx={{ mt: 3, fontSize: "1.2rem" }}>
+          <Box
+  sx={{
+
+    display: "flex",
+    flexDirection: { xs: "row", sm: "row" }, // Row for small screens, column for larger screens
+    gap: 2,
+    justifyContent: { xs: "center", sm: "center" }, // Center buttons on small screens
+    alignItems: "center",
+  }}
+>
+  <Button
+    variant="contained"
+    onClick={() => setActiveTab("feedback")}
+    sx={{
+      fontSize: { xs: "0.8rem", sm: "1.2rem" }, // Smaller font size on small screens
+      backgroundColor: "#74c0fc",
+      color: "black",
+      fontWeight: "bold",
+      width: { xs: "auto", sm: "100%" }, // Auto width on small screens, full width on larger
+      maxWidth: { sm: "250px" }, // Max width on larger screens
+      px: { xs: 2, sm: 3 }, // Responsive padding
+      height: { sm: "80px"}
+    }}
+  >
+    Feedback
+  </Button>
+  <Button
+    variant="contained"
+    onClick={() => setActiveTab("grievance")}
+    sx={{
+      fontSize: { xs: "0.8rem", sm: "1.2rem" }, // Smaller font size on small screens
+      backgroundColor: "#74c0fc",
+      color: "black",
+      fontWeight: "bold",
+      width: { xs: "auto", sm: "100%" }, // Auto width on small screens, full width on larger
+      maxWidth: { sm: "250px" }, // Max width on larger screens
+      px: { xs: 2, sm: 3 }, // Responsive padding
+    }}
+  >
+    Grievance Support
+  </Button>
+</Box>
+
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 2, mt: 2 }}>
+            {activeTab === "feedback" && (
+              <>
+                <Typography variant="body1" sx={{ fontSize: "1.2rem" }}>
                   Does the system meet your expectations for managing bus
                   schedules and crew assignments?
                 </Typography>
@@ -250,13 +264,11 @@ const FeedbackSupport = () => {
                   minRows={3}
                   style={{ width: "100%", fontSize: "1rem", color: "black" }}
                 />
-              </Box>
-            </Box>
-          )}
-          {activeTab === "grievance" && (
-            <Box>
-              <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-                <Typography variant="body1" sx={{ mt: 3, fontSize: "1.2rem" }}>
+              </>
+            )}
+            {activeTab === "grievance" && (
+              <>
+                <Typography variant="body1" sx={{ fontSize: "1.2rem" }}>
                   Complaint Title
                 </Typography>
                 <TextareaAutosize
@@ -277,9 +289,9 @@ const FeedbackSupport = () => {
                   minRows={3}
                   style={{ width: "100%", fontSize: "1rem", color: "black" }}
                 />
-              </Box>
-            </Box>
-          )}
+              </>
+            )}
+          </Box>
         </Box>
       </Box>
     </Box>
