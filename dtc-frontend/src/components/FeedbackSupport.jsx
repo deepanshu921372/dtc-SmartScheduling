@@ -18,7 +18,6 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import DirectionsBusIcon from "@mui/icons-material/DirectionsBus";
 import PeopleIcon from "@mui/icons-material/People";
 import RouteIcon from "@mui/icons-material/AltRoute";
-import BuildIcon from "@mui/icons-material/Build";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import FeedbackIcon from "@mui/icons-material/Feedback";
 import { Link } from "react-router-dom";
@@ -54,11 +53,6 @@ const FeedbackSupport = () => {
               text: "Route Management",
               icon: <RouteIcon />,
               to: "/route-management",
-            },
-            {
-              text: "Maintenance Management",
-              icon: <BuildIcon />,
-              to: "/maintenance-management",
             },
             {
               text: "Reports and Analytics",
@@ -130,16 +124,17 @@ const FeedbackSupport = () => {
         <Drawer
           variant="permanent"
           sx={{
-            display: { xs: "none", sm: "block" },
-            "& .MuiDrawer-paper": {
+            display: { xs: 'none', sm: 'block' },
+            '& .MuiDrawer-paper': {
               width: mobileOpen ? drawerWidth : drawerCollapsedWidth,
-              boxSizing: "border-box",
-              backgroundColor: "lightblue",
-              transition: "width 0.3s ease-in-out",
-              height: "721px",
-              top: "123px",
-              position: "fixed",
-              paddingTop: "64px",
+              boxSizing: 'border-box',
+              backgroundColor: 'lightblue',
+              borderRadius: '0 10px  10px 0px',
+              transition: 'width 0.3s ease-in-out',
+              height: '675px',
+              top: '120px',
+              position: 'fixed',
+              paddingTop: '64px',
             },
           }}
           open

@@ -18,7 +18,6 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import DirectionsBusIcon from "@mui/icons-material/DirectionsBus";
 import PeopleIcon from "@mui/icons-material/People";
 import RouteIcon from "@mui/icons-material/AltRoute";
-import BuildIcon from "@mui/icons-material/Build";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import FeedbackIcon from "@mui/icons-material/Feedback";
 import { Link } from "react-router-dom";
@@ -53,11 +52,6 @@ const Office = () => {
               text: "Route Management",
               icon: <RouteIcon />,
               to: "/route-management",
-            },
-            {
-              text: "Maintenance Management",
-              icon: <BuildIcon />,
-              to: "/maintenance-management",
             },
             {
               text: "Reports and Analytics",
@@ -97,7 +91,6 @@ const Office = () => {
             </ListItem>
           ))}
         </List>
-        
       </Box>
     </div>
   );
@@ -129,16 +122,17 @@ const Office = () => {
         <Drawer
           variant="permanent"
           sx={{
-            display: { xs: "none", sm: "block" },
-            "& .MuiDrawer-paper": {
-              width: mobileOpen ? drawerWidth : drawerCollapsedWidth, // Use flexible widths
-              boxSizing: "border-box",
-              backgroundColor: "lightblue",
-              transition: "width 0.3s ease-in-out",
-              height: "721px",
-              top: "123px",
-              position: "fixed",
-              paddingTop: "64px",
+            display: { xs: 'none', sm: 'block' },
+            '& .MuiDrawer-paper': {
+              width: mobileOpen ? drawerWidth : drawerCollapsedWidth,
+              boxSizing: 'border-box',
+              backgroundColor: 'lightblue',
+              borderRadius: '0 10px  10px 0px',
+              transition: 'width 0.3s ease-in-out',
+              height: '675px',
+              top: '120px',
+              position: 'fixed',
+              paddingTop: '64px',
             },
           }}
           open
@@ -249,7 +243,6 @@ const Office = () => {
             { text: "Bus Management", to: "/bus-management" },
             { text: "Crew Management", to: "/crew-management" },
             { text: "Route Management", to: "/route-management" },
-            { text: "Maintenance Management", to: "/maintenance-management" },
             { text: "Reports and Analytics", to: "/reports-analytics" },
             { text: "Feedback and Support", to: "/feedback-support" },
           ].map((item, index) => (
@@ -310,14 +303,10 @@ const Office = () => {
           position: "fixed",
           top: 16,
           left: 16,
-          color: "black",
-          backgroundColor: "white",
-          borderRadius: "50%",
-          zIndex: 1300,
-          display: { xs: "flex", sm: "none" },
+          zIndex: 1200,
         }}
       >
-        {mobileOpen ? <CloseIcon /> : <MenuIcon />}
+        <MenuIcon />
       </IconButton>
     </Box>
   );
