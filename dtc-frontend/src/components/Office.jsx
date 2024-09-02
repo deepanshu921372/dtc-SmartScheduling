@@ -160,11 +160,11 @@ const Office = () => {
             mb: 5,
             textAlign: "center",
             color: "black",
-            fontSize: "3rem",
+            fontSize: "2.2rem",
             fontWeight: 600,
           }}
         >
-          Welcome Admin
+          Welcome Admin to Uttam Nagar Depot
         </Typography>
         <Box
           sx={{
